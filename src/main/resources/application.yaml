@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: workout-app
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/workout_app
+    username: postgres
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 1

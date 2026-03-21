@@ -1,0 +1,16 @@
+INSERT INTO exercises (name, category, muscle_group, equipment, is_custom) VALUES
+    ('Barbell Squat',       'strength',    'quadriceps', 'barbell',    FALSE),
+    ('Bench Press',         'strength',    'chest',      'barbell',    FALSE),
+    ('Deadlift',            'strength',    'hamstrings', 'barbell',    FALSE),
+    ('Pull-up',             'strength',    'back',       'bodyweight', FALSE),
+    ('Overhead Press',      'strength',    'shoulders',  'barbell',    FALSE),
+    ('Barbell Row',         'strength',    'back',       'barbell',    FALSE),
+    ('Dumbbell Curl',       'strength',    'biceps',     'dumbbell',   FALSE),
+    ('Tricep Pushdown',     'strength',    'triceps',    'cable',      FALSE),
+    ('Leg Press',           'strength',    'quadriceps', 'machine',    FALSE),
+    ('Romanian Deadlift',   'strength',    'hamstrings', 'barbell',    FALSE),
+    ('Incline Bench Press', 'strength',    'chest',      'barbell',    FALSE),
+    ('Lat Pulldown',        'strength',    'back',       'cable',      FALSE),
+    ('Plank',               'strength',    'core',       'bodyweight', FALSE),
+    ('Running',             'cardio',      'full body',  'none',       FALSE),
+    ('Cycling',             'cardio',      'legs',       'bike',       FALSE);
