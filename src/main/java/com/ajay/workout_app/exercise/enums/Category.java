@@ -1,4 +1,4 @@
-package com.ajay.workout_app.exercise;
+package com.ajay.workout_app.exercise.enums;
 
 public enum Category {
     STRENGTH,

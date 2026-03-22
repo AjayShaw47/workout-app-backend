@@ -1,13 +1,11 @@
-package com.ajay.workout_app.progressLog;
+package com.ajay.workout_app.progress.entity;
 
-import com.ajay.workout_app.exercise.Exercise;
-import com.ajay.workout_app.user.User;
+import com.ajay.workout_app.exercise.entity.Exercise;
+import com.ajay.workout_app.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

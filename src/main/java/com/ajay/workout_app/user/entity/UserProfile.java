@@ -1,5 +1,7 @@
-package com.ajay.workout_app.user;
+package com.ajay.workout_app.user.entity;
 
+import com.ajay.workout_app.user.enums.FitnessGoal;
+import com.ajay.workout_app.user.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Profile {
+public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

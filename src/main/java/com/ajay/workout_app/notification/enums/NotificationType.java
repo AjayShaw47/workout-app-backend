@@ -1,4 +1,4 @@
-package com.ajay.workout_app.user;
+package com.ajay.workout_app.notification.enums;
 
 public enum NotificationType {
     ACHIEVEMENT_EARNED,

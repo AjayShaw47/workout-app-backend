@@ -1,5 +1,6 @@
-package com.ajay.workout_app.achievement;
+package com.ajay.workout_app.achievement.entity;
 
+import com.ajay.workout_app.achievement.enums.AchievementCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

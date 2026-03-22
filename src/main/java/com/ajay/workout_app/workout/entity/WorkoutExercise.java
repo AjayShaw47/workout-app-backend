@@ -1,7 +1,6 @@
-package com.ajay.workout_app.workoutExercise;
+package com.ajay.workout_app.workout.entity;
 
-import com.ajay.workout_app.exercise.Exercise;
-import com.ajay.workout_app.workout.Workout;
+import com.ajay.workout_app.exercise.entity.Exercise;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

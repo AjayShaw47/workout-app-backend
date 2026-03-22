@@ -1,7 +1,8 @@
-package com.ajay.workout_app.nutritionLog;
+package com.ajay.workout_app.nutrition.entity;
 
-import com.ajay.workout_app.food.Food;
-import com.ajay.workout_app.user.User;
+import com.ajay.workout_app.food.entity.Food;
+import com.ajay.workout_app.nutrition.enums.MealType;
+import com.ajay.workout_app.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

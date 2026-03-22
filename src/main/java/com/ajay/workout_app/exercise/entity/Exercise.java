@@ -1,6 +1,7 @@
-package com.ajay.workout_app.exercise;
+package com.ajay.workout_app.exercise.entity;
 
-import com.ajay.workout_app.user.User;
+import com.ajay.workout_app.exercise.enums.Category;
+import com.ajay.workout_app.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 public class Exercise {
     @Id
-    private Integer id;
+    private Short id;
 
     @Column(name="name",nullable = false,length = 150)
     private String name;

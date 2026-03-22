@@ -1,5 +1,7 @@
-package com.ajay.workout_app.user;
+package com.ajay.workout_app.notification.entity;
 
+import com.ajay.workout_app.notification.enums.NotificationType;
+import com.ajay.workout_app.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

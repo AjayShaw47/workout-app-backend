@@ -1,4 +1,4 @@
-package com.ajay.workout_app.food;
+package com.ajay.workout_app.food.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

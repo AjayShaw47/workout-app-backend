@@ -1,4 +1,4 @@
-package com.ajay.workout_app.workoutExercise;
+package com.ajay.workout_app.workout.enums;
 
 public enum SetType {
     NORMAL,
