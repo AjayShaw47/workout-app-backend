@@ -9,7 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
+import org.springframework.context.annotation.Profile;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ public class User {
     private String passwordHash;
 
     @Column(name="oauth_provider")
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     @Enumerated(EnumType.STRING)
     private OauthProvider oauthProvider;
 
@@ -42,6 +46,7 @@ public class User {
 
     @Column(name="role")
     @Enumerated(EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     private Role role = Role.USER;
 
     @Column(name="created_at",nullable = false, updatable = false)
@@ -60,4 +65,5 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<UserAchievement> userAchievements = new ArrayList<>();
+
 }

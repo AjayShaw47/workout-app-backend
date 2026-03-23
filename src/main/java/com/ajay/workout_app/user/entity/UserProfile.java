@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -38,6 +40,7 @@ public class UserProfile {
 
     @Column(name="gender")
     @Enumerated(EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     private Gender gender;
 
     @Column(name = "height_cm", precision = 5, scale = 2)
@@ -48,6 +51,7 @@ public class UserProfile {
 
     @Column(name="fitness_goal")
     @Enumerated(EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     private FitnessGoal fitnessGoal;
 
     @UpdateTimestamp
