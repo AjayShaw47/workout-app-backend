@@ -4,6 +4,7 @@ import com.ajay.workout_app.progress.entity.ProgressLog;
 import com.ajay.workout_app.user.enums.OauthProvider;
 import com.ajay.workout_app.user.enums.Role;
 import com.ajay.workout_app.achievement.entity.UserAchievement;
+import com.ajay.workout_app.routine.entity.RoutineDay;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -65,5 +66,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<UserAchievement> userAchievements = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<RoutineDay> routineDays = new ArrayList<>();
 
 }
