@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -34,9 +34,6 @@ public class WorkoutExercise {
     @Column(name = "notes",columnDefinition = "TEXT")
     private String notes;
 
-    @Column(name = "superset_group")
-    private Integer supersetGroup;
-
     @OneToMany(mappedBy = "workoutExercise",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<WorkoutSet> sets = new ArrayList<>();
+    private Set<WorkoutSet> sets = new LinkedHashSet<>();
 }

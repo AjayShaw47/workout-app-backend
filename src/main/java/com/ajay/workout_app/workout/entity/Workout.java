@@ -8,8 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,15 +25,6 @@ public class Workout {
     @Column(name="title", length = 150)
     private String title;
 
-    @Column(name="notes", columnDefinition = "TEXT")
-    private String notes;
-
-    @Column(name="duration_seconds")
-    private Integer durationSeconds;
-
-    @Column(name="performed_at",nullable = false)
-    private OffsetDateTime performedAt =OffsetDateTime.now();
-
     @CreationTimestamp
     @Column(name="created_at",updatable = false,nullable = false)
     private OffsetDateTime createdAt;
@@ -44,5 +35,5 @@ public class Workout {
 
     @OneToMany(mappedBy = "workout", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("orderIndex ASC")
-    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
+    private Set<WorkoutExercise> workoutExercises = new LinkedHashSet<>();
 }
