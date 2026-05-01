@@ -7,5 +7,6 @@ public record WorkoutExerciseResponseDTO(
         UUID workoutExerciseId,
         String exerciseName,
         Integer orderIndex,
+        Boolean inProgress,
         List<SetResponseDTO> setsDTO
 ) {}

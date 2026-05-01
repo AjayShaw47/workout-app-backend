@@ -3,6 +3,7 @@ package com.ajay.workout_app.routine.service;
 import com.ajay.workout_app.routine.dto.RoutineDTO;
 import com.ajay.workout_app.routine.dto.RoutineDayResponse;
 import com.ajay.workout_app.routine.dto.RoutineDayRequest;
+import com.ajay.workout_app.routine.dto.RoutineDayExerciseRequest;
 import com.ajay.workout_app.routine.entity.RoutineDay;
 import com.ajay.workout_app.routine.entity.RoutineDayExercise;
 import com.ajay.workout_app.routine.mapper.RoutineDayMapper;
@@ -31,24 +32,15 @@ public class RoutineDayService {
     private final RoutineDayMapper routineDayMapper;
     private final EntityManager entityManager;
 
-    public RoutineDayResponse getDayRoutine(UUID userId, Integer dayOfWeek) {
-        RoutineDay routineDay = routineDayRepository
-                .findByUserIdAndDayOfWeek(userId, dayOfWeek.shortValue()).orElse(null);
-
-        String routine_name = Objects.requireNonNull(routineDay).getName();
-        List<RoutineDayExercise> routineDayExercises = routineDay.getRoutineDayExercises();
-
-        Map<Integer,String> exerciseMap = new HashMap<>();
-
-        routineDayExercises.forEach(routineDayExercise ->
-            exerciseMap.put(routineDayExercise.getOrderIndex(), routineDayExercise.getExercise().getName())
-        );
-
-        return new RoutineDayResponse(routine_name,exerciseMap);
+    public List<RoutineDayResponse> getAllUserRoutines(UUID userId) {
+        List<RoutineDay> routineDays = routineDayRepository.findByUserId(userId);
+        return routineDays.stream()
+                .map(routineDayMapper::toResponse)
+                .toList();
     }
 
     @Transactional
-    public RoutineDayResponse createRoutineDay(Short dayOfWeek, RoutineDayRequest dto) {
+    public RoutineDayResponse createRoutineDay(Short dayOfWeek, RoutineDayRequest request) {
 
         UUID userId = UUID.fromString("23b0cf0a-0bff-47ce-ba44-46a138e0d360");
         User user = userRepository.findById(userId)
@@ -58,16 +50,28 @@ public class RoutineDayService {
         routineDay.setUser(user);
         routineDay.setDayOfWeek(dayOfWeek);
 
-        if(dto.getName() == null || dto.getName().isEmpty()){
+        if(request == null || request.getName() == null || request.getName().trim().isEmpty()){
             routineDay.setName("Day " + dayOfWeek);
         } else {
-            routineDay.setName(dto.getName());
+            routineDay.setName(request.getName());
         }
 
-        // Save the routine day first
         RoutineDay savedRoutineDay = routineDayRepository.save(routineDay);
 
-        // Create and save RoutineDayExercise records
+        return routineDayMapper.toResponse(savedRoutineDay);
+    }
+
+    @Transactional
+    public RoutineDayResponse addRoutineExercises(UUID userId, Short dayOfWeek, RoutineDayExerciseRequest dto) {
+        RoutineDay routineDay = routineDayRepository.findByUserIdAndDayOfWeek(userId, dayOfWeek)
+            .orElseThrow(() -> new RuntimeException("Routine day not found for user ID: " + userId + " and day of week: " + dayOfWeek));
+
+        // Get the current max orderIndex to append new exercises
+        int maxOrderIndex = routineDay.getRoutineDayExercises().stream()
+                .mapToInt(RoutineDayExercise::getOrderIndex)
+                .max()
+                .orElse(0);
+
         List<Short> exerciseIds = dto.getExerciseIds();
         for (int i = 0; i < exerciseIds.size(); i++) {
             Short exerciseId = exerciseIds.get(i);
@@ -75,21 +79,20 @@ public class RoutineDayService {
                 .orElseThrow(() -> new RuntimeException("Exercise not found with ID: " + exerciseId));
             
             RoutineDayExercise routineDayExercise = new RoutineDayExercise();
-            routineDayExercise.setRoutineDay(savedRoutineDay);
+            routineDayExercise.setRoutineDay(routineDay);
             routineDayExercise.setExercise(exercise);
-            routineDayExercise.setOrderIndex(i + 1);
+            routineDayExercise.setOrderIndex(maxOrderIndex + i + 1);
             
             routineDayExerciseRepository.save(routineDayExercise);
-
         }
 
         // Flush changes to database to ensure exercises are persisted
         entityManager.flush();
         
         // Refresh the entity to reload lazy collections from database
-        entityManager.refresh(savedRoutineDay);
+        entityManager.refresh(routineDay);
 
-        return routineDayMapper.toResponse(savedRoutineDay);
+        return routineDayMapper.toResponse(routineDay);
     }
 
     @Transactional

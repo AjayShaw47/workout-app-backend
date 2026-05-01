@@ -34,6 +34,9 @@ public class WorkoutExercise {
     @Column(name = "notes",columnDefinition = "TEXT")
     private String notes;
 
+    @Column(name = "in_progress")
+    private Boolean inProgress;
+
     @OneToMany(mappedBy = "workoutExercise",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<WorkoutSet> sets = new LinkedHashSet<>();
 }

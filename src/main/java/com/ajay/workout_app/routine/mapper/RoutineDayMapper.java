@@ -22,7 +22,7 @@ public class RoutineDayMapper {
             exerciseMap.put(routineDayExercise.getOrderIndex(), routineDayExercise.getExercise().getName())
         );
 
-        return new RoutineDayResponse(routineName, exerciseMap);
+        return new RoutineDayResponse(routineDay.getDayOfWeek(), routineName, exerciseMap);
     }
 }
 

@@ -47,6 +47,7 @@ public class WorkoutMapper {
                 workoutExercise.getId(),
                 workoutExercise.getExercise() != null ? workoutExercise.getExercise().getName() : null,
                 workoutExercise.getOrderIndex(),
+                workoutExercise.getInProgress(),
                 setResponseDTOs
         );
     }

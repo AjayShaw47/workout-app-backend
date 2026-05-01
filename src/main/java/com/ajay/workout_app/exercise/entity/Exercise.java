@@ -18,9 +18,6 @@ public class Exercise {
     @Column(name="name",nullable = false,length = 150)
     private String name;
 
-    @Column(name="equipment",length = 100)
-    private String equipment;
-
     @Column(name="tracking_type",nullable = false)
     @Enumerated(EnumType.STRING)
     private TrackingType trackingType;
